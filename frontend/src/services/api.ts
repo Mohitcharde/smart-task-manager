@@ -12,8 +12,8 @@ import {
   UsersResponse
 } from "../types";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const rawUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const BASE_URL = rawUrl.trim().replace(/\/+$/, "");
 
 /**
  * Standard fetch helper that handles JSON parsing and friendly error reporting.
