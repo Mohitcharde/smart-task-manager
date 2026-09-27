@@ -1,5 +1,7 @@
 # Smart Task Manager
 
+> 🚀 **Live Demo**: [https://smart-task-manager-lyart-five.vercel.app/](https://smart-task-manager-lyart-five.vercel.app/)
+
 A clean, modern, and dependency-aware task management web application designed to help teams organize, track, and complete work efficiently. Built with a Next.js (TypeScript & Tailwind CSS) frontend and an Express.js backend using an in-memory Map data store.
 
 ---
@@ -246,7 +248,8 @@ npm test
    - **Environment Variables**:
      - Name: `NEXT_PUBLIC_API_URL`
      - Value: URL of your deployed backend (e.g. `https://your-backend.onrender.com`).
-4. Click **Deploy**. Vercel will build and provide your live application URL (e.g., `https://smart-task-manager-xxx.vercel.app`).
+4. Click **Deploy**. Vercel will build and provide your live application URL:
+   - **Production URL**: [https://smart-task-manager-lyart-five.vercel.app/](https://smart-task-manager-lyart-five.vercel.app/)
 
 ### 2. Deploy Backend (e.g. Render / Railway / Koyeb)
 1. Go to [Render](https://render.com) and select **New > Web Service**.
