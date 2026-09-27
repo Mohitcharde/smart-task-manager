@@ -235,6 +235,31 @@ npm test
 
 ---
 
+## Deployment
+
+### 1. Deploy Frontend on Vercel
+1. Log in to [Vercel](https://vercel.com) and click **"Add New" > "Project"**.
+2. Import the `Mohitcharde/smart-task-manager` repository from GitHub.
+3. In the **Configure Project** screen:
+   - **Root Directory**: Click **Edit** and select `frontend` (crucial since the Next.js app lives in the `frontend` folder).
+   - **Framework Preset**: Next.js (automatically detected).
+   - **Environment Variables**:
+     - Name: `NEXT_PUBLIC_API_URL`
+     - Value: URL of your deployed backend (e.g. `https://your-backend.onrender.com`).
+4. Click **Deploy**. Vercel will build and provide your live application URL (e.g., `https://smart-task-manager-xxx.vercel.app`).
+
+### 2. Deploy Backend (e.g. Render / Railway / Koyeb)
+1. Go to [Render](https://render.com) and select **New > Web Service**.
+2. Connect your repository: `Mohitcharde/smart-task-manager`.
+3. Configure the service:
+   - **Root Directory**: `backend`
+   - **Build Command**: `npm install`
+   - **Start Command**: `node src/server.js`
+   - **Environment Variable**: `PORT=5000`
+4. Deploy the service and copy the public HTTPS URL to your Vercel `NEXT_PUBLIC_API_URL` variable.
+
+---
+
 ## Future Improvements
 
 - Persistent database integration (e.g., PostgreSQL / SQLite with Prisma ORM).
