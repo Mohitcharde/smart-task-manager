@@ -1,0 +1,199 @@
+# Smart Task Manager
+
+A simple college/internship level task management application built with Next.js, Express.js, and in-memory data storage.
+
+## Features
+
+- Register new User accounts, then log in using email only
+- Seeded Admin account and two demo User accounts
+- Admin and User roles
+- Dashboard with summary cards
+- Create, edit, delete, and complete tasks
+- Task assignment and filtering
+- Task dependency management and blocked-task logic
+- Optional task file attachments and completed-work links
+- Admin-only user listing
+- Responsive, beginner-friendly interface
+- In-memory backend storage only
+
+## Tech Stack
+
+- Frontend: Next.js, React, JavaScript, CSS
+- Backend: Node.js, Express.js
+- Data storage: JavaScript arrays and objects in memory
+
+## Project Structure
+
+```text
+smart_task_manger/
+├── backend/
+│   ├── controllers/
+│   │   ├── taskController.js
+│   │   └── userController.js
+│   ├── data/
+│   │   └── store.js
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── routes/
+│   │   ├── taskRoutes.js
+│   │   └── userRoutes.js
+│   ├── package.json
+│   └── server.js
+├── frontend/
+│   ├── app/
+│   │   ├── blocked-tasks/page.js
+│   │   ├── create-task/page.js
+│   │   ├── dashboard/page.js
+│   │   ├── login/page.js
+│   │   ├── my-tasks/page.js
+│   │   ├── tasks/page.js
+│   │   ├── users/page.js
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   └── page.js
+│   ├── components/
+│   ├── services/
+│   │   └── api.js
+│   └── package.json
+└── README.md
+```
+
+The frontend uses the Next.js App Router; there is no separate `pages/` directory. The old root-level static HTML/CSS/JavaScript mockup has been removed. `node_modules/` and `.next/` are generated locally by npm and Next.js and are not application source files.
+
+## Installation
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Run App
+
+Open the frontend in the browser at:
+
+```text
+http://localhost:3000
+```
+
+The backend runs at:
+
+```text
+http://localhost:5000
+```
+
+## Publish to GitHub
+
+Push the source code to GitHub from the project root:
+
+```bash
+git init -b main
+git add .
+git commit -m "Initial Smart Task Manager application"
+git remote add origin https://github.com/Mohitcharde/smart-task-manager.git
+git push -u origin main
+```
+
+GitHub stores the source code but does not run this full-stack Next.js and Express application by itself. To make the app publicly accessible, deploy the frontend and backend to an application hosting provider and configure `NEXT_PUBLIC_API_URL` to point to the deployed backend API.
+
+## Default Users
+
+The backend creates these users automatically:
+
+- Admin - admin@example.com
+- Siddhi - siddhi@example.com
+- Mohit - mohit@example.com
+
+Newly registered accounts receive the User role. Registration does not require a password because this project uses mock authentication.
+
+## API Endpoints
+
+### Users
+
+- POST /api/register
+- POST /api/login
+- POST /api/users
+- GET /api/users
+- GET /api/me
+
+### Tasks
+
+- GET /api/tasks
+- GET /api/tasks/:id
+- POST /api/tasks
+- PUT /api/tasks/:id
+- DELETE /api/tasks/:id
+- PATCH /api/tasks/:id/done
+- GET /api/tasks/:id/attachment
+- GET /api/users/:userId/tasks
+- GET /api/tasks/blocked
+
+## Admin vs User Permissions
+
+### Admin
+
+- View dashboard
+- Create tasks
+- Edit and delete tasks
+- View all tasks
+- View blocked tasks
+- View all users
+- Create users
+
+### User
+
+- View dashboard
+- View own tasks
+- Create tasks
+- Update allowed tasks
+- Mark tasks as done when dependencies are complete
+- View blocked tasks
+- Cannot view all users
+
+## Dependency Logic
+
+The app uses a reusable blocked-task check:
+
+```js
+function isTaskBlocked(task, tasks) {
+  if (!task || !task.dependency) {
+    return false;
+  }
+
+  const dependencyTask = tasks.find((item) => item.id === task.dependency);
+
+  if (!dependencyTask) {
+    return false;
+  }
+
+  return dependencyTask.status !== 'Done';
+}
+```
+
+A task is blocked until its dependency is marked Done. Task attachments are held in backend memory, limited to 2 MB, and reset when the backend restarts. Completed-work links must use HTTP or HTTPS.
+
+## Screenshots
+
+Add screenshots of the login page, dashboard, task page, and users page here for documentation.
+
+## Future Improvements
+
+- Add real authentication with JWT
+- Add persistent database storage
+- Add drag-and-drop task boards
+- Add notifications and reminders
+- Add search and sorting
+
+## Author
+
+Smart Task Manager Demo Project
