@@ -1,6 +1,14 @@
 # Smart Task Manager
 
-A simple college/internship level task management application built with Next.js, Express.js, and in-memory data storage.
+Task management with assignments, priorities, dependencies, and role-based access. Built with Next.js and Express using in-memory storage.
+
+## Live Demo
+
+**Application:** [https://smart-task-manager-lyart-five.vercel.app](https://smart-task-manager-lyart-five.vercel.app)
+
+**Backend API:** [https://smart-task-manager-3-b0o4.onrender.com](https://smart-task-manager-3-b0o4.onrender.com)
+
+Sign in with the seeded Admin email `admin@example.com`, or register a User account. Authentication is a demo flow using email only; do not use sensitive or real account information.
 
 ## Features
 
@@ -101,20 +109,6 @@ NEXT_PUBLIC_API_URL=https://smart-task-manager-3-b0o4.onrender.com/api
 ```
 
 This URL is also the production fallback in the frontend source. Set the same value for Production (and Preview if needed) in Vercel if you'd like to control it through settings, then redeploy the frontend. Do not use `localhost` in the Vercel setting: it refers to the visitor's own computer. The backend currently stores data in memory, so its user and task data resets when its process restarts.
-
-## Publish to GitHub
-
-Push the source code to GitHub from the project root:
-
-```bash
-git init -b main
-git add .
-git commit -m "Initial Smart Task Manager application"
-git remote add origin https://github.com/Mohitcharde/smart-task-manager.git
-git push -u origin main
-```
-
-GitHub stores the source code but does not run this full-stack Next.js and Express application by itself. To make the app publicly accessible, deploy the frontend and backend to an application hosting provider and configure `NEXT_PUBLIC_API_URL` to point to the deployed backend API.
 
 ## Default Users
 
