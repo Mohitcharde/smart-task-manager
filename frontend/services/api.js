@@ -1,4 +1,7 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL
+  || (process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5000/api'
+    : 'https://smart-task-manager-3-b0o4.onrender.com/api');
 
 export function getStoredUser() {
   if (typeof window === 'undefined') return null;
@@ -29,16 +32,25 @@ export function getAuthHeaders() {
 }
 
 export async function apiFetch(path, options = {}) {
+  if (!API_BASE) {
+    throw new Error('Backend API is not configured. Set NEXT_PUBLIC_API_URL to your deployed backend URL, ending in /api.');
+  }
+
   const headers = {
     'Content-Type': 'application/json',
     ...getAuthHeaders(),
     ...(options.headers || {})
   };
 
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...options,
-    headers
-  });
+  let response;
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers
+    });
+  } catch (error) {
+    throw new Error('Could not reach the backend API. Check that the backend is deployed and NEXT_PUBLIC_API_URL is correct.');
+  }
 
   const contentType = response.headers.get('content-type') || '';
   const data = contentType.includes('application/json') ? await response.json() : {};

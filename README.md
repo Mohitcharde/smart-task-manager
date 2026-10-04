@@ -86,11 +86,21 @@ Open the frontend in the browser at:
 http://localhost:3000
 ```
 
-The backend runs at:
+The backend runs locally at:
 
 ```text
 http://localhost:5000
 ```
+
+## Deploy to Vercel and Render
+
+The frontend and Express backend are separate services. Deploy the repository's `backend/` service on Render using the root `render.yaml` blueprint, then copy its public service URL. In the Vercel project settings, add this environment variable:
+
+```text
+NEXT_PUBLIC_API_URL=https://smart-task-manager-3-b0o4.onrender.com/api
+```
+
+This URL is also the production fallback in the frontend source. Set the same value for Production (and Preview if needed) in Vercel if you'd like to control it through settings, then redeploy the frontend. Do not use `localhost` in the Vercel setting: it refers to the visitor's own computer. The backend currently stores data in memory, so its user and task data resets when its process restarts.
 
 ## Publish to GitHub
 
